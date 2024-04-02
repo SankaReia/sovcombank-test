@@ -1,7 +1,18 @@
+import { TextField } from "./components/ui/TextField";
+
 function App() {
   return (
     <div>
-      Home
+      <br />
+      <br />
+      <br />
+      <TextField 
+        id="name" 
+        type="text" 
+        label="Name" 
+        required={true} 
+        fullWidth={false}
+        helperText={'Обязательное поле'}/>
     </div>
   );
 }
