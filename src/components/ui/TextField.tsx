@@ -4,12 +4,11 @@ import style from "../../assets/styles/TextField.module.css";
 interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
     id: string;
     label?: string;
-    required?: boolean;
     fullWidth?: boolean;
     helperText?: string;
 }
 
-export const TextField: FC<TextFieldProps> = ({ id, label, required, fullWidth, helperText, ...rest }) => {
+export const TextField: FC<TextFieldProps> = ({ id, label, fullWidth, helperText, ...rest }) => {
     return (
       <>
         <div className={`${style.textField} ${style.textFieldFloating}`}>
@@ -22,7 +21,7 @@ export const TextField: FC<TextFieldProps> = ({ id, label, required, fullWidth, 
             {label && (
                 <label htmlFor={id} className={style.textFieldLabel}>
                     {label}
-                    {required && '*'}
+                    {rest.required && '*'}
                 </label>
             )}
         </div>
