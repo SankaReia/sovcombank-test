@@ -25,7 +25,7 @@ export const TextField: FC<TextFieldProps> = ({ id, label, fullWidth, helperText
                 </label>
             )}
         </div>
-        {!!helperText && <div className={style.textFieldMessage}>{helperText}</div>}
+        {!!helperText && <div className="errorMessage">{helperText}</div>}
       </>
     );
 };

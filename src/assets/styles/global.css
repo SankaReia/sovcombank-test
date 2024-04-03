@@ -1,8 +1,8 @@
 :root {
-    --color-blue: #42a5f5;
-    --color-grey: #bdbdbd;
-    --color-red: #dc3545;
-    --color-black: #212529;
+  --color-blue: #42a5f5;
+  --color-grey: #bdbdbd;
+  --color-red: #dc3545;
+  --color-black: #212529;
 }
 
 * {
@@ -11,6 +11,7 @@
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
+    font-family: monospace;
     color: var(--color-black);
     background-color: #fff;
 }
@@ -19,4 +20,11 @@
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+.errorMessage {
+  width: 100%;
+  margin-top: .25rem;
+  font-size: .875rem;
+  color: var(--color-red);
 }

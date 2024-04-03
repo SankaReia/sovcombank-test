@@ -1,52 +1,34 @@
-.container {
+.select {
   position: relative;
-  width: 20em;
-  min-height: 1.5em;
-  border: .05em solid #777;
+  border: 1px solid var(--color-grey);
+  height: calc(2.5rem + 2px);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
   display: flex;
   align-items: center;
-  gap: .5em;
-  padding: .5em;
-  border-radius: .25em;
+  gap: .5rem;
   outline: none;
 }
 
-.container:focus {
-  border-color: hsl(200, 100%, 50%);
+.select:focus {
+  border-color: var(--color-blue);
+}
+
+.select:focus > .selectLabel {
+  color: var(--color-blue);
 }
 
 .value {
   flex-grow: 1;
   display: flex;
-  gap: .5em;
+  gap: .5rem;
   flex-wrap: wrap;
-}
-
-.clear-btn {
-  background: none;
-  color: #777;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 0;
-  font-size: 1.25em;
-}
-
-.clear-btn:focus,
-.clear-btn:hover {
-  color: #333;
-}
-
-.divider {
-  background-color: #777;
-  align-self: stretch;
-  width: .05em;
 }
 
 .caret {
   translate: 0 25%;
-  border: .25em solid transparent;
-  border-top-color: #777;
+  border: .4rem solid transparent;
+  border-top-color: var(--color-grey);
 }
 
 .options {
@@ -55,14 +37,14 @@
   padding: 0;
   list-style: none;
   display: none;
-  max-height: 15em;
+  max-height: 15rem;
   overflow-y: auto;
-  border: .05em solid #777;
-  border-radius: .25em;
+  border: .05rem solid var(--color-grey);
+  border-radius: .25rem;
   width: 100%;
   left: 0;
-  top: calc(100% + .25em);
-  background-color: white;
+  top: calc(100% + .25rem);
+  background-color: #fff;
   z-index: 100;
 }
 
@@ -71,26 +53,27 @@
 }
 
 .option {
-  padding: .25em .5em;
+  padding: .25rem .5rem;
   cursor: pointer;
 }
 
 .option.selected {
-  background-color: hsl(200, 100%, 70%);
+  background-color: var(--color-blue);
 }
 
 .option.highlighted {
-  background-color: hsl(200, 100%, 50%);
-  color: white
+  background-color: var(--color-blue);
+  filter: brightness(110%);
+  color: #fff;
 }
 
 .option-badge {
   display: flex;
   align-items: center;
-  border: .05em solid #777;
-  border-radius: .25em;
-  padding: .15em .25em;
-  gap: .25em;
+  border: .05rem solid var(--color-grey);
+  border-radius: .25rem;
+  padding: 0 .25rem;
+  gap: .25rem;
   cursor: pointer;
   background: none;
   outline: none;
@@ -98,16 +81,45 @@
 
 .option-badge:hover,
 .option-badge:focus {
-  background-color: hsl(0, 100%, 90%);
-  border-color: hsl(0, 100%, 50%);
+  background-color: #ffcccc;
+  border-color: var(--color-red);
 }
 
 .option-badge:hover > .remove-btn,
 .option-badge:focus > .remove-btn{
-  color: hsl(0, 100%, 50%);
+  background-color: #ffcccc;
+  color: var(--color-red);
 }
 
-.option-badge > .remove-btn {
-  font-size: 1.25em;
-  color: #777;
+.selectLabel {
+  position: absolute;
+  top: 50%;
+  left: 0.3125rem;
+  display: flex;
+  transform: translateY(-50%);
+  pointer-events: none;
+  border: none;
+  background-color: #fff;
+  color: #757575;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  transition: top 0.1s ease-in-out, scale 0.1s ease-in-out;
+}
+
+.select:focus > .selectLabel{
+  top: 0;
+  transform: translateY(-55%) scale(0.75);
+}
+.selectLabelTop {
+  top: 0;
+  transform: translateY(-55%) scale(0.75);
+}
+
+/* validation */
+.select.selectInvalid {
+  border-color: var(--color-red);
+}
+
+.select.selectInvalid > .selectLabel{
+  color: var(--color-red);
 }
