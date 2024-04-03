@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Select } from "./components/ui/Select";
 import { TextField } from "./components/ui/TextField";
 import { SelectOptionI } from "./types/types";
@@ -18,6 +19,15 @@ const options: SelectOptionI[] = [
 ]
 
 function App() {
+  const [group, setGroup] = useState<string[] | string>([]);
+  const [doctor, setDoctor] = useState<string | string[]>('');
+
+  useEffect(()=> {
+    console.log("group",group)
+    console.log("doctor", doctor)
+
+  }, [doctor, group])
+
   return (
     <div>
       <br/>
@@ -45,6 +55,15 @@ function App() {
         options={options} 
         multiple
         required
+        value={group}
+        setValue={setGroup}
+      />
+      <Select 
+        id="doctor"
+        label="Лечащий врач" 
+        options={options}
+        value={doctor}
+        setValue={setDoctor}
       />
     </div>
   );
