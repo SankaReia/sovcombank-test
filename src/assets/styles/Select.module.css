@@ -13,11 +13,6 @@
 .select:focus {
   border-color: var(--color-blue);
 }
-
-.select:focus > .selectLabel {
-  color: var(--color-blue);
-}
-
 .value {
   flex-grow: 1;
   display: flex;
@@ -109,6 +104,7 @@
 .select:focus > .selectLabel{
   top: 0;
   transform: translateY(-55%) scale(0.75);
+  color: var(--color-blue);
 }
 .selectLabelTop {
   top: 0;

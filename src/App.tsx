@@ -3,6 +3,8 @@ import { Select } from "./components/ui/Select";
 import { TextField } from "./components/ui/TextField";
 import { SelectOptionI, SelectValueType } from "./types/types";
 import { DatePicker } from "./components/ui/DatePicker";
+import { Checkbox } from "./components/ui/Checkbox";
+import { Radio } from "./components/ui/Radio";
 
 const options: SelectOptionI[] = [
   {
@@ -49,7 +51,7 @@ function App() {
         label="Телефон"
         required
         fullWidth={false}
-        helperText={'123'}
+        helperText={''}
         autoComplete="tel"
       />
       <br/>
@@ -79,6 +81,24 @@ function App() {
         required
         helperText={''}
         setValue={setDate}
+      />
+      <br />
+      <Checkbox
+        id="sms"
+        label="SMS"
+      />
+      <br />
+      <Radio
+        value='Муж'
+        id="gender1"
+        label="Муж"
+        name="gender"
+      />
+      <Radio
+        value='Жен'
+        id="gender2"
+        label="Жен"
+        name="gender"
       />
     </div>
   );

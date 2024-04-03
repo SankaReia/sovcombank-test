@@ -32,6 +32,7 @@
 .datePickerInput:focus + .datePickerLabel {
     top: 0;
     transform: translateY(-50%) scale(0.75);
+    color: var(--color-blue);
 }
 .datePickerLabelTop {
     top: 0;
