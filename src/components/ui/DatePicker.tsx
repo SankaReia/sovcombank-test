@@ -8,7 +8,7 @@ interface DatePickerProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const DatePicker: FC<DatePickerProps> = ({ label, helperText, ...rest }) => {
   return (
-    <>  
+    <div className="relative">  
         <div className={style.datePicker}>
             <input 
                 {...rest}
@@ -23,6 +23,6 @@ export const DatePicker: FC<DatePickerProps> = ({ label, helperText, ...rest }) 
         </div>
 
         {!!helperText && <div className="errorMessage">{helperText}</div>}
-    </>
+    </div>
   )
 }

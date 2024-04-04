@@ -8,9 +8,9 @@ interface RadioProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const Radio: FC<RadioProps> = ({ label, ...rest }) => {
   return (
-    <>
+    <div>
         <input type="radio" className={style.radio}  {...rest} />
         <label htmlFor={rest.id}>{label}</label>
-    </>
+    </div>
   )
 }

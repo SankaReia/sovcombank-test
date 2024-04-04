@@ -1,5 +1,5 @@
 :root {
-  --color-blue: #42a5f5;
+  --color-blue: #76dfdb;
   --color-grey: #bdbdbd;
   --color-red: #dc3545;
   --color-black: #212529;
@@ -13,7 +13,6 @@
     line-height: 1.5;
     font-family: monospace;
     color: var(--color-black);
-    background-color: #fff;
 }
 
 *,
@@ -27,4 +26,11 @@
   margin-top: .25rem;
   font-size: .875rem;
   color: var(--color-red);
+  position: absolute;
+  bottom: 0;
+  transform: translate(0, 100%);
+}
+
+.relative {
+  position: relative;
 }

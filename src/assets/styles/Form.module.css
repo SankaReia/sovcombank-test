@@ -1,0 +1,135 @@
+.container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: #fafafa;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form {
+    width: 100%;
+    max-width: 850px;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.form-right {
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 2rem;
+}
+.btn {
+    color: var(--color-blue);
+    border: 1px solid var(--color-blue);
+    padding: 0.5rem;
+    border-radius: 1rem;
+    background: transparent;
+}
+.btn:hover {
+    color: #fff;
+    background-color: var(--color-blue);
+}
+
+.radio-group {
+    display: flex;
+    gap: 2rem;
+}
+
+.form-left {
+    position: relative;
+    border-radius: 1rem;
+    background-color: var(--color-blue);
+    padding: 2rem;
+}
+
+.form-left::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: url(/public/hospital.svg) no-repeat;
+    bottom: 1rem;
+    left: 1rem;
+}
+
+.form-left::before {
+    content: "";
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--color-blue);
+    transform: rotate(45deg);
+    top: 30px;
+    right: -13px;
+}
+
+.form-left h2 {
+    font-size: 2rem;
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 2rem;
+}
+.contacts p {
+    color: #fff;
+    font-size: 1.25rem;
+    margin-top: 1rem;
+}
+.phone {
+    position: relative;
+    padding-left: 30px;
+}
+.phone::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    background: url(/public/phone.svg) no-repeat left;
+    width: 1rem;
+    height: 1rem;
+}
+
+@media (max-width: 850px) {
+    .form {
+        grid-template-columns: 1fr;
+    }
+    .form-left::after {
+        top: 1rem;
+    }
+    
+    .form-left::before {
+        top: 100%;
+        transform: translate(0, -50%) rotate(45deg);
+        right: 25px;
+    }
+}
+
+@media (max-width: 500px) {
+    .form-row {
+        flex-direction: column-reverse;
+    }
+    .form-left h2 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    .contacts p {
+        font-size: 1rem;
+    }
+}

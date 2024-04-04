@@ -38,7 +38,7 @@ export const Select: FC<SelectProps> = ({ id, label, options, value, setValue, h
       }, [isOpen])
     
     return (
-        <>
+        <div className="relative">
             <div
                 ref={containerRef}
                 onBlur={() => setIsOpen(false)}
@@ -48,20 +48,21 @@ export const Select: FC<SelectProps> = ({ id, label, options, value, setValue, h
             >
                 <span className={style.value}>
                     {rest.multiple && Array.isArray(value)
-                    ? value.map(v => (
-                        <button
-                            key={v}
-                            onClick={e => {
-                            e.stopPropagation()
-                            selectOption(v)
-                            }}
-                            className={style["option-badge"]}
-                        >
-                            {v}
-                            <span className={style["remove-btn"]}>&times;</span>
-                        </button>
-                        ))
-                    : value}
+                        ? value.map(v => (
+                            <button
+                                key={v}
+                                onClick={e => {
+                                e.stopPropagation()
+                                selectOption(v)
+                                }}
+                                className={style["option-badge"]}
+                            >
+                                {options.find(el => el.value == v)?.label}
+                                <span className={style["remove-btn"]}>&times;</span>
+                            </button>
+                            ))
+                        : options.find(el => el.value == value)?.label 
+                    }
                 </span>
                 <div className={style.caret}></div>
                 <ul className={`${style.options} ${isOpen ? style.show : ""}`}>
@@ -91,6 +92,6 @@ export const Select: FC<SelectProps> = ({ id, label, options, value, setValue, h
                 )}
             </div>
             {!!helperText && <div className="errorMessage">{helperText}</div>}
-        </>
+        </div>
     );
 };

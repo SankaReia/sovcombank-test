@@ -14,3 +14,10 @@ export interface FormI {
    attending_physician: SelectValueType;
    sms: boolean;
 }
+
+export interface FormErrorI {
+    full_name: string;
+    birth_date: string;
+    phone: string;
+    customer_group: string;
+ }

@@ -9,7 +9,7 @@ interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export const TextField: FC<TextFieldProps> = ({ label, fullWidth, helperText, ...rest }) => {
     return (
-      <>
+      <div className="relative">
         <div className={`${style.textField} ${style.textFieldFloating}`}>
             <input
               {...rest}
@@ -24,6 +24,6 @@ export const TextField: FC<TextFieldProps> = ({ label, fullWidth, helperText, ..
             )}
         </div>
         {!!helperText && <div className="errorMessage">{helperText}</div>}
-      </>
+      </div>
     );
 };
