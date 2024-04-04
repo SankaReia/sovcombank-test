@@ -2,23 +2,20 @@ import { FC, InputHTMLAttributes } from "react";
 import style from "../../assets/styles/DatePicker.module.css";
 
 interface DatePickerProps extends InputHTMLAttributes<HTMLInputElement> {
-    id: string;
     label?: string;
     helperText?: string;
-    value: string;
-    setValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const DatePicker: FC<DatePickerProps> = ({ id, label, helperText, value, setValue, ...rest }) => {
+export const DatePicker: FC<DatePickerProps> = ({ label, helperText, ...rest }) => {
   return (
     <>  
         <div className={style.datePicker}>
             <input 
-                onChange={(e)=> setValue(e.target.value)}
+                {...rest}
                 type="date" 
                 className={`${style.datePickerInput} ${!!helperText && style.datePickerInvalid}`} />
             {label && (
-                <label htmlFor={id} className={`${style.datePickerLabel} ${!!value && style.datePickerLabelTop}`}>
+                <label htmlFor={rest.id} className={`${style.datePickerLabel} ${!!rest.value && style.datePickerLabelTop}`}>
                     {label}
                     {rest.required && '*'}
                 </label>

@@ -1,5 +1,5 @@
 import { FC, SelectHTMLAttributes, useEffect, useRef, useState } from "react";
-import { SelectOptionI, SelectValueType } from "../../types/types";
+import { FormI, SelectOptionI, SelectValueType } from "../../types/types";
 import style from "../../assets/styles/Select.module.css";
 
 
@@ -9,7 +9,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
     helperText?: string;
     options: SelectOptionI[];
     value: SelectValueType;
-    setValue: React.Dispatch<React.SetStateAction<SelectValueType>>;
+    setValue: (value: SelectValueType) => void
 }
 
 export const Select: FC<SelectProps> = ({ id, label, options, value, setValue, helperText, ...rest }) => {
