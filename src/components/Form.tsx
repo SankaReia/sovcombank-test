@@ -7,6 +7,7 @@ import { attendingPhysicianOptions, customerGroupOptions } from "../consts/optio
 import { Checkbox } from "./ui/Checkbox";
 import { Radio } from "./ui/Radio";
 import style from '../assets/styles/Form.module.css'
+import { toast } from "sonner";
 
 
 const Form: FC = () => {
@@ -45,13 +46,21 @@ const Form: FC = () => {
         setFormError(prev => ({...prev, [name]: '' }))
     }
 
+    const phoneValidator = () => {
+        if(!/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(form.phone)){
+            setFormError(prev => ({...prev, phone: 'Некорректный номер телефона' }))
+            return true;
+        }
+        return false
+    }
+
     const submitHandler = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!(e.target as HTMLFormElement).checkValidity() || form.customer_group.length == 0) {
+        if (!(e.target as HTMLFormElement).checkValidity() || form.customer_group.length == 0 || phoneValidator()) {
             if (form.customer_group.length == 0) setFormError(prev => ({...prev, ['customer_group']: 'Обязательное поле' }))
-            console.log("error") 
+            toast.warning("Заполните обязательные поля")
         } else {
-            console.log("succes")
+            toast.success("Регистрация прошла успешно")
         }
     }
   return (

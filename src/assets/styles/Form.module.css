@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--color-black);
 }
 
 .form {
@@ -113,7 +114,9 @@
     .form-left::after {
         top: 1rem;
     }
-    
+    .form-left h2 {
+        margin-top: 0;
+    }
     .form-left::before {
         top: 100%;
         transform: translate(0, -50%) rotate(45deg);
@@ -127,9 +130,12 @@
     }
     .form-left h2 {
         font-size: 1.5rem;
-        margin-top: 1.5rem;
     }
     .contacts p {
         font-size: 1rem;
+    }
+    .form-left::after {
+        width: 40px;
+        height: 40px;
     }
 }
