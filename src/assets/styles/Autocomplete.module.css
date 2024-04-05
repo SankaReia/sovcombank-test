@@ -1,0 +1,20 @@
+.dropdown {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    transform: translate(0, 100%);
+    z-index: 100;
+    background: white;
+    border: 1px solid var(--color-grey);
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 100%;
+}
+
+.dropdown.show {
+    display: block;
+}
+
+.dropdownItem {
+    cursor: pointer;
+}

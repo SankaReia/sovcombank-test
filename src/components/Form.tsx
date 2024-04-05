@@ -39,22 +39,12 @@ const Form: FC = () => {
         },
         body: JSON.stringify({query: form.full_name})
     }
-    fetch(url, options)
-    .then(response => response.json())
-    .then(result =>  console.log(result.suggestion))
-    .catch(error => console.log("error", error));
 
-    // console.log(nameOptions)
-
-    // useEffect(() => {
-    //     console.log(form)
-    // }, [form]);
-
-    // useEffect(() => {
-    //     if (form.customer_group.length > 0) {
-    //         setFormError((prev) => ({ ...prev, ["customer_group"]: "" }));
-    //     }
-    // }, [form.customer_group]);
+    useEffect(() => {
+        if (form.customer_group.length > 0) {
+            setFormError((prev) => ({ ...prev, ["customer_group"]: "" }));
+        }
+    }, [form.customer_group]);
 
     const checkValidityHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const name: string = e.target.name;
@@ -65,6 +55,11 @@ const Form: FC = () => {
         const name: string = e.target.name;
         let value: string | boolean = e.target.value;
         if (name == "sms") value = e.target.checked;
+        if (name == 'full_name') {
+            fetch(url, options).then(response => response.json())
+            .then(result =>  setNameOptions(result.suggestions))
+            .catch(error => console.log("error", error));
+        }
         setForm((prev) => ({ ...prev, [name]: value }));
         setFormError((prev) => ({ ...prev, [name]: "" }));
     };
@@ -108,7 +103,7 @@ const Form: FC = () => {
                         fullWidth={true}
                         helperText={formError.full_name}
                         onInvalid={checkValidityHandler}
-                        options={[]}
+                        options={nameOptions}
                     />
 
                     <div className={style["form-row"]}>
