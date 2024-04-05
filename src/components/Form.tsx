@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { FormErrorI, FormI } from "../types/types";
+import { FormErrorI, FormI, DaDataSuggestion, DaDataFio } from "../types/types";
 import { TextField } from "./ui/TextField";
 import { DatePicker } from "./ui/DatePicker";
 import { Select } from "./ui/Select";
@@ -8,6 +8,7 @@ import { Checkbox } from "./ui/Checkbox";
 import { Radio } from "./ui/Radio";
 import style from "../assets/styles/Form.module.css";
 import { toast } from "sonner";
+import { Autocomplete } from "./ui/Autocomplete";
 
 const Form: FC = () => {
     const [form, setForm] = useState<FormI>({
@@ -25,31 +26,35 @@ const Form: FC = () => {
         phone: "",
         customer_group: "",
     });
+    const [nameOptions, setNameOptions] = useState<DaDataSuggestion<DaDataFio>[]>([]);
 
-    console.log(process.env.REACT_APP_TOKEN);
-    console.log(process.env.REACT_APP_URL_API);
+    const url = "http://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/fio";
+    const options: RequestInit = {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": "Token " + process.env.REACT_APP_TOKEN
+        },
+        body: JSON.stringify({query: form.full_name})
+    }
+    fetch(url, options)
+    .then(response => response.json())
+    .then(result =>  console.log(result.suggestion))
+    .catch(error => console.log("error", error));
 
-    // const options = {
-    //     method: "POST",
-    //     mode: "cors",
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //         "Accept": "application/json",
-    //         "Authorization": "Token " + process.env.TOKEN
-    //     },
-    //     body: JSON.stringify({query: query})
-    // }
+    // console.log(nameOptions)
 
-    // fetch(url, options)
-    // .then(response => response.text())
-    // .then(result => console.log(result))
-    // .catch(error => console.log("error", error));
+    // useEffect(() => {
+    //     console.log(form)
+    // }, [form]);
 
-    useEffect(() => {
-        if (form.customer_group.length > 0) {
-            setFormError((prev) => ({ ...prev, ["customer_group"]: "" }));
-        }
-    }, [form.customer_group]);
+    // useEffect(() => {
+    //     if (form.customer_group.length > 0) {
+    //         setFormError((prev) => ({ ...prev, ["customer_group"]: "" }));
+    //     }
+    // }, [form.customer_group]);
 
     const checkValidityHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const name: string = e.target.name;
@@ -92,7 +97,7 @@ const Form: FC = () => {
                     </div>
                 </div>
                 <div className={style["form-right"]}>
-                    <TextField
+                    <Autocomplete
                         id="full_name"
                         name="full_name"
                         type="text"
@@ -103,6 +108,7 @@ const Form: FC = () => {
                         fullWidth={true}
                         helperText={formError.full_name}
                         onInvalid={checkValidityHandler}
+                        options={[]}
                     />
 
                     <div className={style["form-row"]}>

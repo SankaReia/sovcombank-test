@@ -1,7 +1,7 @@
 import { FC, InputHTMLAttributes } from "react";
 import style from "../../assets/styles/TextField.module.css";
 
-interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string;
     fullWidth?: boolean;
     helperText?: string;
