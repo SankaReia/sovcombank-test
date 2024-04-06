@@ -28,7 +28,6 @@ const Form: FC = () => {
     });
     const [nameOptions, setNameOptions] = useState<DaDataSuggestion<DaDataFio>[]>([]);
 
-    const url = "http://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/fio";
     const options: RequestInit = {
         method: "POST",
         mode: "cors",
@@ -56,7 +55,7 @@ const Form: FC = () => {
         let value: string | boolean = e.target.value;
         if (name == "sms") value = e.target.checked;
         if (name == 'full_name') {
-            fetch(url, options).then(response => response.json())
+            fetch(process.env.REACT_APP_URL_API as string, options).then(response => response.json())
             .then(result =>  setNameOptions(result.suggestions))
             .catch(error => console.log("error", error));
         }
@@ -104,6 +103,7 @@ const Form: FC = () => {
                         helperText={formError.full_name}
                         onInvalid={checkValidityHandler}
                         options={nameOptions}
+                        setValue={(value) => setForm((prev) => ({ ...prev, full_name: value }))}
                     />
 
                     <div className={style["form-row"]}>
@@ -145,7 +145,7 @@ const Form: FC = () => {
                         multiple
                         helperText={formError.customer_group}
                         value={form.customer_group}
-                        setValue={(value) => setForm((prev) => ({ ...prev, ["customer_group"]: value }))}
+                        setValue={(value) => setForm((prev) => ({ ...prev, customer_group: value }))}
                     />
 
                     <Select
@@ -153,7 +153,7 @@ const Form: FC = () => {
                         label="Лечащий врач"
                         options={attendingPhysicianOptions}
                         value={form.attending_physician}
-                        setValue={(value) => setForm((prev) => ({ ...prev, ["attending_physician"]: value }))}
+                        setValue={(value) => setForm((prev) => ({ ...prev, attending_physician: value }))}
                     />
 
                     <Checkbox id="sms" name="sms" label="Не отправлять СМС" checked={form.sms} onChange={inputChangeHandler} />

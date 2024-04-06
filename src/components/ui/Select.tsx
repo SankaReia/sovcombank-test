@@ -33,9 +33,43 @@ export const Select: FC<SelectProps> = ({ id, label, options, value, setValue, h
         return rest.multiple ? value.includes(option) : option === value
       }
     
-      useEffect(() => {
+    useEffect(() => {
         if (isOpen) setHighlightedIndex(0)
-      }, [isOpen])
+    }, [isOpen])
+
+    useEffect(() => {
+        const handler = (e: KeyboardEvent) => {
+          if (e.target != containerRef.current) return
+          switch (e.code) {
+            case "Enter":
+            case "Space":
+              setIsOpen(prev => !prev)
+              if (isOpen) setValue(options[highlightedIndex].value)
+              break
+            case "ArrowUp":
+            case "ArrowDown": {
+              if (!isOpen) {
+                setIsOpen(true)
+                break
+              }
+    
+              const newValue = highlightedIndex + (e.code === "ArrowDown" ? 1 : -1)
+              if (newValue >= 0 && newValue < options.length) {
+                setHighlightedIndex(newValue)
+              }
+              break
+            }
+            case "Escape":
+              setIsOpen(false)
+              break
+          }
+        }
+        containerRef.current?.addEventListener("keydown", handler)
+    
+        return () => {
+          containerRef.current?.removeEventListener("keydown", handler)
+        }
+    }, [isOpen, highlightedIndex, options])
     
     return (
         <div className="relative">
@@ -65,25 +99,28 @@ export const Select: FC<SelectProps> = ({ id, label, options, value, setValue, h
                     }
                 </span>
                 <div className={style.caret}></div>
-                <ul className={`${style.options} ${isOpen ? style.show : ""}`}>
-                    {options.map((option, index) => (
-                    <li
-                        onClick={e => {
-                            e.stopPropagation()
-                            selectOption(option.value)
-                            setIsOpen(false)
-                        }}
-                        onMouseEnter={() => setHighlightedIndex(index)}
-                        key={option.value}
-                        className={`${style.option}
-                            ${ isOptionSelected(option.value) ? style.selected : ""} 
-                            ${index === highlightedIndex ? style.highlighted : ""}`
-                        }
-                    >
-                        {option.label}
-                    </li>
-                    ))}
-                </ul>
+                {
+                    isOpen &&
+                    <ul className={style.options}>
+                        {options.map((option, index) => (
+                        <li
+                            onClick={e => {
+                                e.stopPropagation()
+                                selectOption(option.value)
+                                setIsOpen(false)
+                            }}
+                            onMouseEnter={() => setHighlightedIndex(index)}
+                            key={option.value}
+                            className={`${style.option}
+                                ${ isOptionSelected(option.value) ? style.selected : ""} 
+                                ${index === highlightedIndex ? style.highlighted : ""}`
+                            }
+                        >
+                            {option.label}
+                        </li>
+                        ))}
+                    </ul>
+                }
                 {label && (
                     <label htmlFor={id} className={`${style.selectLabel} ${(value.length > 0) && style.selectLabelTop}`}>
                         {label}

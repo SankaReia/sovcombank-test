@@ -1,20 +1,23 @@
 .dropdown {
-    display: none;
     position: absolute;
     bottom: 0;
     transform: translate(0, 100%);
     z-index: 100;
     background: white;
     border: 1px solid var(--color-grey);
-    padding: 1rem;
     border-radius: 1rem;
     width: 100%;
-}
-
-.dropdown.show {
-    display: block;
+    list-style: none;
+    padding: 0;
 }
 
 .dropdownItem {
     cursor: pointer;
+    padding: 0.25rem 1rem;
+    border-radius: 1rem;
+}
+
+.dropdownItem.highlighted {
+    background-color: var(--color-blue);
+    color: #fff;
 }

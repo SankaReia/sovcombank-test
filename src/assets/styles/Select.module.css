@@ -8,6 +8,7 @@
   align-items: center;
   gap: .5rem;
   outline: none;
+  cursor: pointer;
 }
 
 .select:focus {
@@ -31,7 +32,6 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  display: none;
   max-height: 15rem;
   overflow-y: auto;
   border: .05rem solid var(--color-grey);
@@ -41,10 +41,6 @@
   top: calc(100% + .25rem);
   background-color: #fff;
   z-index: 100;
-}
-
-.options.show {
-  display: block;
 }
 
 .option {
