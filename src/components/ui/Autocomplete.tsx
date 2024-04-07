@@ -61,7 +61,7 @@ export const Autocomplete: FC<AutocompleteProps> = ({ options, setValue, ...rest
                 {...rest}
             />
             {
-                (isOpen) &&
+                (isOpen && rest.value) &&
                 <ul className={style.dropdown}>
                     {options.map((option: DaDataSuggestion<DaDataFio>, index) => 
                         <li 

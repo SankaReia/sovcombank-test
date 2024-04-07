@@ -10,6 +10,19 @@ import style from "../assets/styles/Form.module.css";
 import { toast } from "sonner";
 import { Autocomplete } from "./ui/Autocomplete";
 
+const options = (full_name: string) : RequestInit => {
+    return {
+        method: "POST",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": "Token " + process.env.REACT_APP_TOKEN
+        },
+        body: JSON.stringify({query: full_name})
+    }
+}
+
 const Form: FC = () => {
     const [form, setForm] = useState<FormI>({
         full_name: "",
@@ -28,17 +41,6 @@ const Form: FC = () => {
     });
     const [nameOptions, setNameOptions] = useState<DaDataSuggestion<DaDataFio>[]>([]);
 
-    const options: RequestInit = {
-        method: "POST",
-        mode: "cors",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-            "Authorization": "Token " + process.env.REACT_APP_TOKEN
-        },
-        body: JSON.stringify({query: form.full_name})
-    }
-
     useEffect(() => {
         if (form.customer_group.length > 0) {
             setFormError((prev) => ({ ...prev, ["customer_group"]: "" }));
@@ -55,7 +57,7 @@ const Form: FC = () => {
         let value: string | boolean = e.target.value;
         if (name == "sms") value = e.target.checked;
         if (name == 'full_name') {
-            fetch(process.env.REACT_APP_URL_API as string, options).then(response => response.json())
+            fetch(process.env.REACT_APP_URL_API as string, options(value as string)).then(response => response.json())
             .then(result =>  setNameOptions(result.suggestions))
             .catch(error => console.log("error", error));
         }
