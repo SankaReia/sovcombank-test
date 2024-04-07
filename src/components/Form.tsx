@@ -145,6 +145,7 @@ const Form: FC = () => {
                         label="Группа клиентов"
                         options={customerGroupOptions}
                         multiple
+                        required
                         helperText={formError.customer_group}
                         value={form.customer_group}
                         setValue={(value) => setForm((prev) => ({ ...prev, customer_group: value }))}
